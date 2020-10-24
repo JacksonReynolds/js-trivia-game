@@ -15,7 +15,11 @@ class User {
             },
             body: JSON.stringify(user)
         }
-        // console.log (user)
-        // fetch("http://localhost:3000/users", options)
+        this.reset()
+        fetch("http://localhost:3000/users", options)
+            .then(resp => resp.json())
+            .then(user => {
+                let newUser = new User(user)
+            })
     }
 } 
