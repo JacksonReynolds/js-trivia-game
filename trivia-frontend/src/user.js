@@ -15,6 +15,7 @@ class User {
             },
             body: JSON.stringify(user)
         }
-        fetch("http://localhost:3000/users", options)
+        // console.log (user)
+        // fetch("http://localhost:3000/users", options)
     }
 } 
