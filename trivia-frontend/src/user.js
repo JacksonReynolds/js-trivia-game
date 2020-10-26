@@ -7,13 +7,7 @@ class User {
 
     }
 
-    static toggleUserForm() {
-        const formContainer = document.getElementById('user_form_container')
-        formContainer.getAttribute('class') === 'show' ? formContainer.setAttribute("class", 'hide') : formContainer.setAttribute("class", 'show')
-    }
-
     static addUser(e) {
-        e.preventDefault()
         const name = this.querySelector('input').value
         let user = {user: {name}}
         let options = {
@@ -27,11 +21,6 @@ class User {
         this.reset()
         fetch("http://localhost:3000/users", options)
             .then(resp => resp.json())
-            .then(user => {
-                let newUser = new User(user)
-                this.toggleUserForm()
-                newUser.showNameTag()
-                
-            })
+            .then(user => {new User(user)})
     }
 } 

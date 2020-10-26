@@ -1,6 +1,6 @@
 class Game {
-    constructor(userData) {
-        this.user = new User(userData)
+    constructor(user) {
+        this.user = user
     }
 
     play() {
@@ -16,7 +16,9 @@ class Game {
 
     updateScore() {}
 
-
+    toggleUserForm() {
+        userFormContainer.getAttribute('class') === 'show' ? userFormContainer.setAttribute("class", 'hide') : userFormContainer.setAttribute("class", 'show')
+    }
 
 
 }
