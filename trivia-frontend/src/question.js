@@ -6,34 +6,34 @@ class Question {
     }
 
     static all = []
-    
-    get answers() {
-        return this.answers
-    }
 
     shuffleAnswers() {
-        for (let i = this.answers.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1))
-            [this.answers[i], this.answers[j]] = [this.answers[j], this.answers[i]]
+        let currentIndex = this.answers.length, temporaryValue, randomIndex
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex)
+          currentIndex -= 1
+          temporaryValue = this.answers[currentIndex]
+          this.answers[currentIndex] = this.answers[randomIndex]
+          this.answers[randomIndex] = temporaryValue
         }
     }
 
     static loadQuestions() {
-        debugger
         fetch('http://localhost:3000/questions')
             .then(resp => resp.json())
             .then(questions => {
-                // this.createQuestions(questions.data)
-                debugger
+                Question.createQuestions(questions.data)
             })
-        this.shuffleQuestions()
-        return this.all
     }
 
     static shuffleQuestions() {
-        for (let i = this.all.length - 1; i > 0; i--) {
-            let j = Math.floor(Math.random() * (i + 1))
-            [this.all[i], this.all[j]] = [this.all[j], this.all[i]]
+        let currentIndex = this.all.length, temporaryValue, randomIndex
+        while (0 !== currentIndex) {
+          randomIndex = Math.floor(Math.random() * currentIndex)
+          currentIndex -= 1
+          temporaryValue = this.all[currentIndex]
+          this.all[currentIndex] = this.all[randomIndex]
+          this.all[randomIndex] = temporaryValue
         }
     }
 

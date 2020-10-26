@@ -8,21 +8,39 @@ class Game {
 
         welcome.setAttribute('class', 'show')
         startBtn.addEventListener('click', function(e) {
-            debugger
             e.preventDefault()
+            welcome.setAttribute('class', 'hide')
             this.play()
         }.bind(this))
     }
 
     play() {
         let playing = true
-        let questions = Question.loadQuestions()
+        let questions = Question.all
+        
+        Question.shuffleQuestions()
         while (playing) {
             for (let question of questions) {
-                renderQuestion(question)
+                let response
+
                 question.shuffleAnswers()
-                renderAnswers(question.answers)
+                response = this.askQuestion(question)
+                if (response.correct) {
+                    // add one to score, continue to next question
+                } else {
+                    // tell user they lose and show them the hi scores
+                    // prompt to play again
+                }
+
             }
+            playing = false
+        }
+    }
+
+    askQuestion(question) {
+        this.renderQuestion(question)
+        for (let answer of question.answers) {
+            this.renderAnswer(answer)
         }
     }
 
@@ -32,16 +50,21 @@ class Game {
 
     renderQuestion(question) {
         const questionContent = questionContainer.querySelector('#question_content')
-
-        questionContent.innerText = question.content
+        
+        questionContainer.setAttribute('class', 'show')
+        questionContent.innerHTML = question.content 
     }
 
-    renderAnswers(answers) {
-        const answersForm = questionContainer.querySelector('#answers')
+    renderAnswer(answer) {
+        const answersDiv = questionContainer.querySelector('#answers')
+        const answerDiv = document.createElement('div')
 
-        for (let answer of answers) {
-            answersForm.innerHTML += `<input type="radio" id="answer-${answer.id}" value="${answer.id}><label for="${answer.id}">${answer.content}</label><br>"`
-        }
+        // answersDiv.innerHTML = ''
+
+        answerDiv.setAttribute('class', 'answer')
+        answerDiv.innerText = answer.content
+
+        answersDiv.appendChild(answerDiv)
     }
 
     displayHighScores() {}
