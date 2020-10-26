@@ -3,19 +3,29 @@ class Game {
         this.user = user
     }
 
+    renderWelcome() {
+        const startBtn = welcome.querySelector('#go')
+
+        welcome.setAttribute('class', 'show')
+        startBtn.addEventListener('click', function(e) {
+            e.preventDefault()
+            this.play()
+        }.bind(this))
+    }
+
     play() {
         let playing = true
-        const questions = Question.loadQuestions()
+        let questions = Question.loadQuestions()
         while (playing) {
             for (let question of questions) {
-                renderQuestion()
+                renderQuestion(question)
             }
         }
     }
 
-    renderWelcome() {}
+    renderQuestion(question) {
 
-    renderQuestion() {}
+    }
 
     displayHighScores() {}
 
