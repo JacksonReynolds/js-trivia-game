@@ -18,9 +18,9 @@ class User {
             },
             body: JSON.stringify(user)
         }
-        this.reset()
         fetch("http://localhost:3000/users", options)
             .then(resp => resp.json())
             .then(user => {new User(user)})
+        this.reset()
     }
 } 

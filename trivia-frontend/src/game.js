@@ -4,8 +4,11 @@ class Game {
     }
 
     play() {
-        renderwWelcome()
-        renderQuestion()
+        let playing = true
+        const questions = Question.loadQuestions()
+        while (playing) {
+
+        }
     }
 
     renderWelcome() {}
