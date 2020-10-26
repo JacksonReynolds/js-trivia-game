@@ -8,6 +8,7 @@ class Game {
 
         welcome.setAttribute('class', 'show')
         startBtn.addEventListener('click', function(e) {
+            debugger
             e.preventDefault()
             this.play()
         }.bind(this))

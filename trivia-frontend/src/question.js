@@ -19,9 +19,13 @@ class Question {
     }
 
     static loadQuestions() {
+        debugger
         fetch('http://localhost:3000/questions')
             .then(resp => resp.json())
-            .then(questions => {this.createQuestions(questions)})
+            .then(questions => {
+                // this.createQuestions(questions.data)
+                debugger
+            })
         this.shuffleQuestions()
         return this.all
     }
