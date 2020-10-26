@@ -11,6 +11,13 @@ class Question {
         return this.answers
     }
 
+    shuffleAnswers() {
+        for (let i = this.answers.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1))
+            [this.answers[i], this.answers[j]] = [this.answers[j], this.answers[i]]
+        }
+    }
+
     static loadQuestions() {
         fetch('http://localhost:3000/questions')
             .then(resp => resp.json())

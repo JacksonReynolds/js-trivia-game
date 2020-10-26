@@ -19,12 +19,28 @@ class Game {
         while (playing) {
             for (let question of questions) {
                 renderQuestion(question)
+                question.shuffleAnswers()
+                renderAnswers(question.answers)
             }
         }
     }
 
-    renderQuestion(question) {
+    renderHiScores() {
 
+    }
+
+    renderQuestion(question) {
+        const questionContent = questionContainer.querySelector('#question_content')
+
+        questionContent.innerText = question.content
+    }
+
+    renderAnswers(answers) {
+        const answersForm = questionContainer.querySelector('#answers')
+
+        for (let answer of answers) {
+            answersForm.innerHTML += `<input type="radio" id="answer-${answer.id}" value="${answer.id}><label for="${answer.id}">${answer.content}</label><br>"`
+        }
     }
 
     displayHighScores() {}
