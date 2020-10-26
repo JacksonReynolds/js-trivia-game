@@ -6,17 +6,22 @@ class Question {
     }
 
     static all = []
-    static answers = []
+    
+    get answers() {
+        return this.asnwers
+    }
 
     static loadQuestions() {
         fetch('http://localhost:3000/questions')
             .then(resp => resp.json())
             .then(questions => {
                 for (let question of questions) {
-                    new Question(question)
+                    let q = new Question(question)
+                    for (let answer of question.attributes.answers) {
+                        let a = new Answer(answer)
+                        q.answers.push(a)
+                    }
                 }
             })
     }
-
-    static
 }
