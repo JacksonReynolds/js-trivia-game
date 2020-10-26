@@ -3,6 +3,11 @@ class User {
         this.name = name
     }
 
+    static toggleUserForm() {
+        const formContainer = document.getElementById('user_form_container')
+        formContainer.getAttribute('class') === 'show' ? formContainer.setAttribute("class", 'hide') : formContainer.setAttribute("class", 'show')
+    }
+
     static addUser(e) {
         e.preventDefault()
         const name = this.querySelector('input').value
@@ -20,6 +25,8 @@ class User {
             .then(resp => resp.json())
             .then(user => {
                 let newUser = new User(user)
+                this.toggleUserForm()
+
             })
     }
 } 
