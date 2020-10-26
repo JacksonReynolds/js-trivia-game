@@ -7,7 +7,9 @@ class Game {
         let playing = true
         const questions = Question.loadQuestions()
         while (playing) {
-
+            for (let question of questions) {
+                renderQuestion()
+            }
         }
     }
 
