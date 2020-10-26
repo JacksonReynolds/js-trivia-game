@@ -3,7 +3,20 @@ class Game {
         this.user = new User(userData)
     }
 
-    renderQuestion() {
-
+    play() {
+        renderwWelcome()
+        renderQuestion()
     }
+
+    renderWelcome() {}
+
+    renderQuestion() {}
+
+    displayHighScores() {}
+
+    updateScore() {}
+
+
+
+
 }

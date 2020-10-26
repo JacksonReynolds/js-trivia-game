@@ -3,6 +3,10 @@ class User {
         this.name = name
     }
 
+    showNameTag() {
+
+    }
+
     static toggleUserForm() {
         const formContainer = document.getElementById('user_form_container')
         formContainer.getAttribute('class') === 'show' ? formContainer.setAttribute("class", 'hide') : formContainer.setAttribute("class", 'show')
@@ -26,7 +30,8 @@ class User {
             .then(user => {
                 let newUser = new User(user)
                 this.toggleUserForm()
-
+                newUser.showNameTag()
+                
             })
     }
 } 
