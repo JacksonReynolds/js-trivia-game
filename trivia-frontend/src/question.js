@@ -61,20 +61,38 @@ class Question {
         const questionDiv = questionContainer.appendChild(document.createElement('div'))
         const questionContentP = questionDiv.appendChild(document.createElement('p'))
 
-        if (i === 1) {
+        if (i === 0) {
             questionDiv.setAttribute('class', 'show')
         } else {
             questionDiv.setAttribute('class', 'hide')
         }
-        questionDiv.setAttribute('id', `question-${this.id}`)
+        questionDiv.setAttribute('id', `question-${this.id}-div`)
         questionContentP.innerText += this.content
     }
 
     renderAnswers() {
-        const answersForm = questionContainer.querySelector(`#question-${this.id}`).appendChild(document.createElement('form'))
+        const answersForm = questionContainer.querySelector(`#question-${this.id}-div`).appendChild(document.createElement('form'))
 
+        this.shuffleAnswers()
+        answersForm.setAttribute('id', `question-${this.id}-form`)
         for (let answer of this.answers) {
-            answersForm.innerHTML += `<input type="radio" id="answer${answer.id}" value="${answer.id}"><label>${answer.content}</label>`
+            answersForm.innerHTML += `<br><input type="radio" name="answer" value="${answer.id}"><label>${answer.content}</label>`
         }
+        answersForm.innerHTML += "<br><input type='submit' id='submit'>"
+        this.listenForSubmit(answersForm)
+    }
+
+    listenForSubmit(form) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault()
+            for (let radio of form.elements) {
+                if (!!radio.checked) {
+                    let answer = this.answers.find(a => a.id === radio.value)
+                    if (answer.correct) {
+                        console.log("correct!")
+                    } else {console.log("pooop")}
+                }
+            }
+        }.bind(this))
     }
 }
