@@ -11,20 +11,8 @@ class Game {
             e.preventDefault()
             welcome.setAttribute('class', 'hide')
             Question.shuffleQuestions()
-            this.play()
+            this.renderQuestions()
         }.bind(this))
-    }
-
-    play() {
-        let i = 0
-        while (this.stillPlaying(i)) {
-            this.askQuestion(Question.all[i])
-            i++
-        }
-    }
-
-    stillPlaying(i) {
-        return i < Question.all.length && this.user.alive
     }
 
     askQuestion(question) {
@@ -33,17 +21,33 @@ class Game {
         question.shuffleAnswers()
         this.renderQuestion(question)
         this.renderAnswers(question.answers)
+
+        answersForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+
+        })
     }
 
-    renderHiScores() {
-
+    renderQuestions() {
+        for (let i = 0; i < Question.all.length; i++) {
+            this.createQuestionDiv(Question.all[i], i)
+        }
     }
 
-    renderQuestion(question) {
-        const questionContent = questionContainer.querySelector('#question_content')
-        
-        questionContainer.setAttribute('class', 'show')
-        questionContent.innerHTML = question.content 
+    createQuestionDiv(question, i) {
+        const questionDiv = questionContainer.appendChild(document.createElement('div'))
+        const questionContentP = questionDiv.appendChild(document.createElement('p'))
+
+        if (i === 1) {
+            questionDiv.setAttribute('class', 'show')
+        } else {
+            questionDiv.setAttribute('class', 'hide')
+        }
+        questionDiv.setAttribute('id', `question-${question.id}`)
+        questionContentP.innerTExt += question.content
+        question.shuffleAnswers()
+        // render answers
+
     }
 
     renderAnswer(answer) {
@@ -55,6 +59,10 @@ class Game {
         answerDiv.innerText = answer.content
 
         answersDiv.appendChild(answerDiv)
+    }
+
+    evaluateAnswer() {
+
     }
 
     displayHighScores() {}

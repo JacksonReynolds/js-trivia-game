@@ -1,5 +1,6 @@
 class Question {
     constructor(question) {
+        this.id = question.id
         this.content = question.attributes.content
         this.answers = []
         Question.all.push(this)
