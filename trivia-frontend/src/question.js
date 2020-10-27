@@ -51,9 +51,9 @@ class Question {
     // game stuff
 
     static renderQuestions() {
-        for (let i = 0; i < this.all.length; i++) {
-            this.all[i].createQuestionDiv(i)
-            this.all[i].renderAnswers()
+        for (const question of Question.all) {
+            question.createQuestionDiv(Question.all.indexOf(question))
+            question.renderAnswers()
         }
     }
 
@@ -74,29 +74,11 @@ class Question {
         const answersForm = questionContainer.querySelector(`#question-${this.id}-div`).appendChild(document.createElement('form'))
 
         this.shuffleAnswers()
-        answersForm.setAttribute('id', `question-${this.id}-form`)
+        answersForm.setAttribute('id', "answer-form")
         for (let answer of this.answers) {
             answersForm.innerHTML += `<br><input type="radio" name="answer" value="${answer.id}"><label>${answer.content}</label>`
         }
         answersForm.innerHTML += "<br><input type='submit' id='submit'>"
-        this.listenForSubmit(answersForm)
-    }
-
-    listenForSubmit(form) {
-        form.addEventListener('submit', (e) => {
-            e.preventDefault()
-            const questionDiv = form.parentElement
-
-            for (let radio of form.elements) {
-                if (!!radio.checked) {
-                    let answer = this.answers.find(a => a.id === radio.value)
-                    if (answer.correct) {
-                        this.hideCurrentQuestion()
-                        this.showNextQuestion()
-                    } else {console.log("pooop")}
-                }
-            }
-        })
     }
 
     hideCurrentQuestion() {
@@ -106,6 +88,5 @@ class Question {
     }
 
     showNextQuestion() {
-        const nextQuestionDiv = 
     }
 }

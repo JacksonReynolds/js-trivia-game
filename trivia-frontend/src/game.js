@@ -12,19 +12,29 @@ class Game {
             welcome.setAttribute('class', 'hide')
             Question.shuffleQuestions()
             Question.renderQuestions()
+            this.listenForSubmits()
         }.bind(this))
     }
 
-    renderQuestions() {
-        for (const question of Question.all) {
-            question.createQuestionDiv(Question.all.indexOf(question))
-            question.renderAnswers()
-        }
-        this.listenForSubmits()
-    }
-
     listenForSubmits() {
+        const answerForms = document.querySelectorAll('#answer-form')
 
+        for (const form of answerForms) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault()
+                const questionDiv = form.parentElement
+    
+                for (let radio of form.elements) {
+                    if (!!radio.checked) {
+                        let answer = this.answers.find(a => a.id === radio.value)
+                        if (answer.correct) {
+                            this.hideCurrentQuestion()
+                            this.showNextQuestion()
+                        } else {console.log("pooop")}
+                    }
+                }
+            })
+        }
     }
 
     evaluateAnswer() {
