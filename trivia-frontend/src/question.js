@@ -47,4 +47,34 @@ class Question {
             }
         }
     }
+
+    // game stuff
+
+    static renderQuestions() {
+        for (let i = 0; i < this.all.length; i++) {
+            this.all[i].createQuestionDiv(i)
+            this.all[i].renderAnswers()
+        }
+    }
+
+    createQuestionDiv(i) {
+        const questionDiv = questionContainer.appendChild(document.createElement('div'))
+        const questionContentP = questionDiv.appendChild(document.createElement('p'))
+
+        if (i === 1) {
+            questionDiv.setAttribute('class', 'show')
+        } else {
+            questionDiv.setAttribute('class', 'hide')
+        }
+        questionDiv.setAttribute('id', `question-${this.id}`)
+        questionContentP.innerText += this.content
+    }
+
+    renderAnswers() {
+        const answersForm = questionContainer.querySelector(`#question-${this.id}`).appendChild(document.createElement('form'))
+
+        for (let answer of this.answers) {
+            answersForm.innerHTML += `<input type="radio" id="answer${answer.id}" value="${answer.id}"><label>${answer.content}</label>`
+        }
+    }
 }

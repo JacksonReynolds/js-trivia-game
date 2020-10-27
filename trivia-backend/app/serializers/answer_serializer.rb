@@ -1,4 +1,4 @@
 class AnswerSerializer
   include FastJsonapi::ObjectSerializer
-  attributes :content, :correct
+  attributes :content, :correct, :id
 end
