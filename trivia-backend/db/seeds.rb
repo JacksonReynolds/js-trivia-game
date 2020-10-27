@@ -32,7 +32,7 @@ questions = [
         incorrect_answers: [
             "United States",
             "Germany",
-            "China (People&#039;s Republic of)"
+            "China (People's Republic of)"
         ]
     },
     {
@@ -47,7 +47,7 @@ questions = [
     },
     {
         difficulty: 2,
-        question: "Madonna&#039;s song &quot;Hung Up&quot; includes a piece from which popular 70s song?",
+        question: "Madonna's song &quot;Hung Up&quot; includes a piece from which popular 70s song?",
         correct_answer: "Gimmie! Gimmie! Gimme! (A Man After Midnight)",
         incorrect_answers: [
             "Staying Alive",
@@ -57,7 +57,7 @@ questions = [
     },
     {
         difficulty: 2,
-        question: "Which city did Anger berate for ruining pizza in &quot;Inside Out&quot;?",
+        question: "Which city did Anger berate for ruining pizza in \"Inside Out\"?",
         correct_answer: "San Francisco",
         incorrect_answers: [
             "Minnesota",
@@ -95,7 +95,7 @@ questions = [
     },
     {
         difficulty: 2,
-        question: "Minecraft wasn&rsquo;t the original name to Minecraft.",
+        question: "Minecraft wasn't the original name to Minecraft.",
         correct_answer: "True",
         incorrect_answers: [
             "False"

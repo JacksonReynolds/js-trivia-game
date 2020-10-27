@@ -15,26 +15,26 @@ class Game {
     }
 
     play() {
-        let playing = true
         let questions = Question.all
         
         Question.shuffleQuestions()
-        while (playing) {
-            for (let question of questions) {
-                let response
+        let i = 0
+        while (this.notOver(i)) {
+            this.askQuestion(quesiton[i])
+            i++
 
-                question.shuffleAnswers()
-                response = this.askQuestion(question)
-                if (response.correct) {
-                    // add one to score, continue to next question
-                } else {
-                    // tell user they lose and show them the hi scores
-                    // prompt to play again
-                }
-
+            if (i < questions.length) {
+                questions[i].shuffleAnswers()
+                this.askQuestion(question[i])
             }
-            playing = false
+
+            
+            
         }
+    }
+
+    notOver(i) {
+        return i < Question.all.length && this.user.alive
     }
 
     askQuestion(question) {
