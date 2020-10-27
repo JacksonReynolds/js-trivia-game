@@ -15,6 +15,18 @@ class Game {
         }.bind(this))
     }
 
+    renderQuestions() {
+        for (const question of Question.all) {
+            question.createQuestionDiv(Question.all.indexOf(question))
+            question.renderAnswers()
+        }
+        this.listenForSubmits()
+    }
+
+    listenForSubmits() {
+
+    }
+
     evaluateAnswer() {
 
     }

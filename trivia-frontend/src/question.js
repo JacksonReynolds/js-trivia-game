@@ -83,16 +83,29 @@ class Question {
     }
 
     listenForSubmit(form) {
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', (e) => {
             e.preventDefault()
+            const questionDiv = form.parentElement
+
             for (let radio of form.elements) {
                 if (!!radio.checked) {
                     let answer = this.answers.find(a => a.id === radio.value)
                     if (answer.correct) {
-                        console.log("correct!")
+                        this.hideCurrentQuestion()
+                        this.showNextQuestion()
                     } else {console.log("pooop")}
                 }
             }
-        }.bind(this))
+        })
+    }
+
+    hideCurrentQuestion() {
+        const currentQuestionDiv = document.querySelector(`#question-${this.id}-div`)
+
+        currentQuestionDiv.setAttribute('class', 'hide')
+    }
+
+    showNextQuestion() {
+        const nextQuestionDiv = 
     }
 }
