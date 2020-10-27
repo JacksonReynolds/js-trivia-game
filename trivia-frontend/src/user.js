@@ -1,14 +1,14 @@
 class User {
-    constructor(name) {
-        this.name = name
-        this.alive = false
+    constructor(user) {
+        this.name = user.attributes.name
+        this.points = user.attributes.points
     }
 
     showNameTag() {
 
     }
 
-    static addUser(e) {
+    static addUser() {
         const name = this.querySelector('input').value
         let user = {user: {name}}
         let options = {
@@ -21,7 +21,6 @@ class User {
         }
         fetch("http://localhost:3000/users", options)
             .then(resp => resp.json())
-            .then(user => {new User(user)})
-        this.reset()
+            .then(user => new User(user.data))
     }
 } 
