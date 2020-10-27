@@ -10,38 +10,29 @@ class Game {
         startBtn.addEventListener('click', function(e) {
             e.preventDefault()
             welcome.setAttribute('class', 'hide')
+            Question.shuffleQuestions()
             this.play()
         }.bind(this))
     }
 
     play() {
-        let questions = Question.all
-        
-        Question.shuffleQuestions()
         let i = 0
-        while (this.notOver(i)) {
-            this.askQuestion(quesiton[i])
+        while (this.stillPlaying(i)) {
+            this.askQuestion(Question.all[i])
             i++
-
-            if (i < questions.length) {
-                questions[i].shuffleAnswers()
-                this.askQuestion(question[i])
-            }
-
-            
-            
         }
     }
 
-    notOver(i) {
+    stillPlaying(i) {
         return i < Question.all.length && this.user.alive
     }
 
     askQuestion(question) {
+        const answersForm = questionContainer.querySelector('#answers')
+
+        question.shuffleAnswers()
         this.renderQuestion(question)
-        for (let answer of question.answers) {
-            this.renderAnswer(answer)
-        }
+        this.renderAnswers(question.answers)
     }
 
     renderHiScores() {
@@ -56,8 +47,7 @@ class Game {
     }
 
     renderAnswer(answer) {
-        const answersDiv = questionContainer.querySelector('#answers')
-        const answerDiv = document.createElement('div')
+        const answersForm = questionContainer.querySelector('#answers')
 
         // answersDiv.innerHTML = ''
 
