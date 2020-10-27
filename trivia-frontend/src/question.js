@@ -76,7 +76,7 @@ class Question {
         this.shuffleAnswers()
         answersForm.setAttribute('id', "answer-form")
         for (let answer of this.answers) {
-            answersForm.innerHTML += `<br><input type="radio" name="answer" value="${answer.id}"><label>${answer.content}</label>`
+            answersForm.innerHTML += `<br><input type="radio" id="radio" name="answer" value="${answer.id}"><label>${answer.content}</label>`
         }
         answersForm.innerHTML += "<br><input type='submit' id='submit'>"
     }

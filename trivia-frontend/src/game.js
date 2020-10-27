@@ -20,25 +20,30 @@ class Game {
         const answerForms = document.querySelectorAll('#answer-form')
 
         for (const form of answerForms) {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault()
-                const questionDiv = form.parentElement
-    
-                for (let radio of form.elements) {
-                    if (!!radio.checked) {
-                        let answer = this.answers.find(a => a.id === radio.value)
-                        if (answer.correct) {
-                            this.hideCurrentQuestion()
-                            this.showNextQuestion()
-                        } else {console.log("pooop")}
-                    }
-                }
-            })
+            form.addEventListener('submit', this.evaluateAnswer.bind(this))
         }
     }
 
-    evaluateAnswer() {
+    evaluateAnswer(e) {
+        const form = e.target
+        debugger
 
+        e.preventDefault()
+
+        for (let radio of form.querySelectorAll('#radio')) {
+            if (!!radio.checked) {
+                let answer = Answer.all.find(a => a.id === radio.value)
+                if (answer.correct) {
+                    console.log("woot")
+                    // hide this question
+                    // show next
+                    // add point to user score
+                } else {
+                    console.log("pooop")
+                    // end game
+                }
+            }
+        }
     }
 
     displayHighScores() {}
