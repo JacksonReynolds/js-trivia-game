@@ -4,10 +4,6 @@ class User {
         this.points = user.attributes.points
     }
 
-    showNameTag() {
-
-    }
-
     static addUser() {
         const name = this.querySelector('input').value
         let user = {user: {name}}
@@ -21,6 +17,14 @@ class User {
         }
         fetch("http://localhost:3000/users", options)
             .then(resp => resp.json())
-            .then(user => new User(user.data))
+            .then(user => {
+                let newUser = new User(user.data)
+                const newGame = new Game(newUser)
+
+                this.reset()
+                Question.loadQuestions()
+                newGame.toggleUserForm()
+                newGame.renderWelcome()
+            })
     }
 } 

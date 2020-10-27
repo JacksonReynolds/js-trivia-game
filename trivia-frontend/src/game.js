@@ -7,13 +7,19 @@ class Game {
         const startBtn = welcome.querySelector('#go')
 
         welcome.setAttribute('class', 'show')
-        startBtn.addEventListener('click', function(e) {
-            e.preventDefault()
-            welcome.setAttribute('class', 'hide')
-            Question.shuffleQuestions()
-            Question.renderQuestions()
-            this.listenForSubmits()
-        }.bind(this))
+        startBtn.addEventListener('click', this.startGame.bind(this))
+    }
+
+    hideWelcome() {
+        welcome.setAttribute('class', 'hide')
+    }
+
+    startGame(e) {
+        e.preventDefault()
+        this.hideWelcome()
+        Question.shuffleQuestions()
+        Question.renderQuestions()
+        this.listenForSubmits()
     }
 
     listenForSubmits() {
@@ -26,14 +32,14 @@ class Game {
 
     evaluateAnswer(e) {
         const form = e.target
-        debugger
+        const formRadios = form.querySelectorAll('#radio')
 
         e.preventDefault()
-
-        for (let radio of form.querySelectorAll('#radio')) {
+        for (let radio of formRadios) {
             if (!!radio.checked) {
                 let answer = Answer.all.find(a => a.id === radio.value)
                 if (answer.correct) {
+                    debugger
                     console.log("woot")
                     // hide this question
                     // show next

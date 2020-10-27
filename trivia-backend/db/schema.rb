@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2020_10_23_172513) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.integer "points"
+    t.integer "points", default: 0
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
