@@ -1,12 +1,18 @@
 class Game {
-    constructor(user) {
-        this.user = user
+    
+    set user(user) {
+        this._user = user
+    }
+
+    get user() {
+        return this._user
     }
 
     renderWelcome() {
-        const startBtn = welcome.querySelector('#go')
-
         welcome.setAttribute('class', 'show')
+    }
+
+    listenForStart() {
         startBtn.addEventListener('click', this.startGame.bind(this))
     }
 
@@ -103,31 +109,23 @@ class Game {
         this.updateUserHiscore()
         this.hideCurrentQuestionDiv()
         this.toggleEndOfGameMessage()
-        this.listenForHiscores()
     }
 
     listenForHiscores() {
-        const hiscoresBtn = endGameDiv.querySelector('#to_hiscores')
-
         hiscoresBtn.addEventListener('click', (e) => {
             e.preventDefault()
             this.user.toggleScoreCard()
             this.toggleEndOfGameMessage()
             User.getHiscores()
-            this.listenForRestart()
         })
     }
 
     listenForRestart() {
-        const restartBtn = hiscoresDiv.querySelector('#start_over')
-
         restartBtn.addEventListener('click', (e) => {
             e.preventDefault()
             User.toggleHiscores()
             User.clearHiscores()
             User.toggleUserForm()
-
-            User.listenForUserSubmit()
         })
     }
 

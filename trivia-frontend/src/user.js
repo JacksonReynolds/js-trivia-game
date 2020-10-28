@@ -5,15 +5,15 @@ class User {
         this.score = user.attributes.score
     }
 
-    static listenForUserSubmit() {
+    static listenForUserSubmit(game) {
         userForm.addEventListener('submit', function(e) {
         e.preventDefault()
-        User.addUser.call(this)
+        User.addUser(game)
         })
     }
 
-    static addUser() {
-        const name = this.querySelector('input').value
+    static addUser(game) {
+        const name = userForm.querySelector('input').value
         let user = {user: {name}}
         let options = {
             method: "POST",
@@ -27,14 +27,15 @@ class User {
             .then(resp => resp.json())
             .then(user => {
                 let newUser = new User(user.data)
-                const newGame = new Game(newUser)
+                game.user = newUser
 
-                this.reset()
+                userForm.reset()
                 Question.all = []
+                Question.clearQuestionContainer()
                 Question.loadQuestions()
                 User.toggleUserForm()
                 newUser.toggleScoreCard()
-                newGame.renderWelcome()
+                game.renderWelcome()
             })
     }
 
@@ -44,7 +45,6 @@ class User {
 
     static displayHiscores(top_users) {
         this.renderHiscoresTable(top_users)
-
         this.toggleHiscores()
     }
 
@@ -56,7 +56,6 @@ class User {
         const table = document.createElement('table')
 
         table.innerHTML += "<tr> <th>user</th> <th>score</th> </tr>"
-        debugger
         for (const user of top_users) {
             table.innerHTML += `<tr> <td>${user.name}</td> <td>${user.score}</td> </tr>`
         }

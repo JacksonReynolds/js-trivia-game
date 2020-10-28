@@ -1,7 +1,44 @@
+body {
+    background-color: #4F86C6;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .hide {
     display: none
 }
 
 .show {
-    display: inline
+    display: inline;
+}
+
+.header {
+    margin: auto;
+    text-align: center;
+    width: 60%;
+    border: 3px solid black;
+    background-color: #F2F4F3;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    border: 3px solid black;
+    background-color: #7EA16B;
+    margin: auto;
+    width: 60%;
+    height: 100%;
+}
+
+.container div {
+    padding: 10px;
+    margin: auto;
+}
+
+#score_card {
+    height: 100%;
+    padding: 10px;
+    width: 25%;
+    border-right: 3px solid black;
 }

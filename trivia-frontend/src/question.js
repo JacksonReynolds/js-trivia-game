@@ -51,6 +51,10 @@ class Question {
 
     // game stuff
 
+    static clearQuestionContainer() {
+        questionContainer.innerHTML = ''
+    }
+
     static renderQuestions() {
         for (const question of Question.all) {
             question.createQuestionDiv(Question.all.indexOf(question))
@@ -82,11 +86,11 @@ class Question {
         answersForm.innerHTML += "<br><input type='submit' id='submit'>"
     }
 
-    hideCurrentQuestion() {
-        const currentQuestionDiv = document.querySelector(`#question-${this.id}-div`)
+    // hideCurrentQuestion() {
+    //     const currentQuestionDiv = document.querySelector(`#question-${this.id}-div`)
 
-        currentQuestionDiv.setAttribute('class', 'hide')
-    }
+    //     currentQuestionDiv.setAttribute('class', 'hide')
+    // }
 
     showNextQuestion() {
     }
