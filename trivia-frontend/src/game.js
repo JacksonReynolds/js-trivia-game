@@ -65,22 +65,24 @@ class Game {
             .then(resp => resp.json())
             .then(user => {
                 this.user.hiscore = user.data.attributes.hiscore
-                this.switchQuestionDivs()
+                this.showHiscores()
             })
     }
     
 
     switchQuestionDivs() {
+        let i = this.indexOfCurrentQuestion() // grab before hiding the current question div
+
         this.hideCurrentQuestionDiv()
-        this.showNextQuestionDiv()
+        this.showNextQuestionDiv(i)
     }
 
     hideCurrentQuestionDiv() {
         this.currentQuestionDiv().setAttribute('class', 'hide')
     }
 
-    showNextQuestionDiv() {
-        const nextQuestionDiv = questionContainer.querySelector(`#question-${Question.all[this.indexOfCurrentQuestion()+1].id}-div`)
+    showNextQuestionDiv(lastIndex) {
+        const nextQuestionDiv = questionContainer.querySelector(`#question-${Question.all[lastIndex+1].id}-div`)
 
         nextQuestionDiv.setAttribute('class', 'show')
     }
@@ -94,7 +96,6 @@ class Game {
     }
 
     currentQuestionDiv() {
-        debugger
         return questionContainer.querySelector('.show')
     }
 
