@@ -14,6 +14,7 @@ class UsersController < ApplicationController
 
     def update
         user = User.find_by(id: params[:id])
+        byebug
         if user.update(user_params)
             render json: UserSerializer.new(user)
         end
@@ -22,6 +23,6 @@ class UsersController < ApplicationController
     private
 
     def user_params
-        params.require(:user).permit(:name)
+        params.require(:user).permit(:name, :score)
     end
 end
