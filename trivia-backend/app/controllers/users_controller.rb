@@ -14,7 +14,6 @@ class UsersController < ApplicationController
 
     def update
         user = User.find_by(id: params[:id])
-        byebug
         if user.update(user_params)
             render json: UserSerializer.new(user)
         end

@@ -49,7 +49,7 @@ class User {
         this.toggleHiscores()
     }
 
-    clearHiscores() {
+    static clearHiscores() {
         hiscoresDiv.querySelector('table').remove()
     }
 
