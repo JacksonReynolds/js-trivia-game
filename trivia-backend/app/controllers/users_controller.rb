@@ -12,6 +12,11 @@ class UsersController < ApplicationController
         render json: UserSerializer.new(users)
     end
 
+    def hiscores
+        users = User.hiscores
+        render json: UserSerializer.new(users)
+    end
+
     private
 
     def user_params
