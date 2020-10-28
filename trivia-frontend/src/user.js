@@ -29,9 +29,11 @@ class User {
                 const newGame = new Game(newUser)
 
                 this.reset()
-                Question.loadQuestions()
+                if (Question.length === 0) {
+                    Question.loadQuestions()
+                }
                 User.toggleUserForm()
-                newUser.showScoreCard()
+                newUser.toggleScoreCard()
                 newGame.renderWelcome()
             })
     }
@@ -40,9 +42,35 @@ class User {
         userFormContainer.getAttribute('class') === 'show' ? userFormContainer.setAttribute("class", 'hide') : userFormContainer.setAttribute("class", 'show')
     }
 
-    showScoreCard() {
-        scoreCardDiv.innerHTML = `<p><str>${this.name}'s Score: <span>0</span></str></p>`
-        scoreCardDiv.setAttribute('class', 'show')
+    static displayHiscores(hiscores) {
+        const restartBtn = hiscoresDiv.querySelector('#start_over')
+
+        this.toggleHiscores()
+        restartBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            this.toggleHiscores()
+            this.toggleUserForm()
+            this.listenForUserSubmit()
+        })
+    }
+
+    static toggleHiscores() {
+        hiscoresDiv.getAttribute('class') === 'hide' ? hiscoresDiv.setAttribute('class', 'show') : hiscoresDiv.setAttribute('class', 'hide')
+    }
+
+    static getHiscores() {
+        fetch("http://localhost:3000/hiscores")
+            .then(resp => resp.json())
+            .then(hiscores => this.displayHiscores(hiscores))
+    }
+
+    toggleScoreCard() {
+        if (scoreCardDiv.getAttribute('class') === 'hide') {
+            scoreCardDiv.innerHTML = `<p><str>${this.name}'s Score: <span>0</span></str></p>`
+            scoreCardDiv.setAttribute('class', 'show')        
+        } else {
+            scoreCardDiv.setAttribute('class', 'hide')
+        }
     }
 
     updateScoreCard() {

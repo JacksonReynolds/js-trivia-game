@@ -52,7 +52,7 @@ class Game {
     }
 
     updateUserHiscore() {
-        let hiscore = this.user.hiscore + this.currentQuestion().difficulty
+        let score = this.user.score
         let user = {user: {hiscore}}
         let options = {
             method: "PATCH",
@@ -65,8 +65,7 @@ class Game {
         fetch(`http://localhost:3000/users/${this.user.id}`, options)
             .then(resp => resp.json())
             .then(user => {
-                this.user.hiscore = user.data.attributes.hiscore
-                this.showHiscores()
+                this.user.score = user.data.attributes.hiscore
             })
     }
     
@@ -101,17 +100,21 @@ class Game {
     }
 
     endGame() {
+        const hiscoresBtn = endGameDiv.querySelector('#hiscores')
+
+        this.updateUserHiscore()
+
         this.hideCurrentQuestionDiv()
         this.toggleEndOfGameMessage()
-        // this.patchUserHiscore()
-            // showHiscores (after successful request)
+        hiscoresBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            this.user.toggleScoreCard()
+            this.toggleEndOfGameMessage()
+            User.getHiscores()
+        })
     }
 
     toggleEndOfGameMessage() {
         endGameDiv.getAttribute('class') === 'hide' ? endGameDiv.setAttribute('class', 'show') : endGameDiv.setAttribute('class', 'hide')
     }
-
-    displayHighScores() {}
-
-
 }

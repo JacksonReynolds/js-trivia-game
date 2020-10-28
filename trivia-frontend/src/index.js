@@ -4,6 +4,7 @@ const questionContainer = document.getElementById('question_container')
 const welcome = document.getElementById('welcome')
 const scoreCardDiv = document.querySelector("#score_card")
 const endGameDiv = document.querySelector('#end_of_game_message')
+const hiscoresDiv = document.querySelector('#hiscores')
 
 User.listenForUserSubmit()
 
