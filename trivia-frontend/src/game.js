@@ -100,7 +100,7 @@ class Game {
     }
 
     endGame() {
-        const hiscoresBtn = endGameDiv.querySelector('#hiscores')
+        const hiscoresBtn = endGameDiv.querySelector('#to_hiscores')
 
         this.updateUserHiscore()
 
