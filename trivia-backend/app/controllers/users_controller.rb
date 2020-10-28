@@ -7,14 +7,9 @@ class UsersController < ApplicationController
         end
     end
 
-    def index
-        users = User.all
-        render json: UserSerializer.new(users)
-    end
-
     def hiscores
-        users = User.hiscores
-        render json: UserSerializer.new(users)
+        top_users = User.hiscores
+        render json: UserSerializer.new(top_users)
     end
 
     private
