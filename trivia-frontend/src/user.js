@@ -1,6 +1,7 @@
 class User {
     constructor(user) {
         this.name = user.attributes.name
+        this.score = 0
     }
 
     static addUser() {
@@ -35,5 +36,11 @@ class User {
     showScoreCard() {
         scoreCardDiv.innerHTML = `<p>${this.name}'s Score: <span>0</span></p>`
         scoreCardDiv.setAttribute('class', 'show')
+    }
+
+    updateScoreCard() {
+        const scoreSpan = scoreCardDiv.querySelector('span')
+
+        scoreSpan.innerText = this.score
     }
 } 

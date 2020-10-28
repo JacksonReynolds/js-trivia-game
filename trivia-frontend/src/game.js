@@ -39,7 +39,9 @@ class Game {
             if (!!radio.checked) {
                 let answer = Answer.all.find(a => a.id === radio.value)
                 if (answer.correct) {
-                    this.updateUserPoints()
+                    this.user.score += this.currentQuestion().difficulty
+                    this.user.updateScoreCard()
+                    this.switchQuestionDivs()
                 } else {
                     alert("YOU FUCKED UP")
                     // end game
@@ -48,7 +50,7 @@ class Game {
         }
     }
 
-    updateUserPoints() {
+    updateUserHiscore() {
         let hiscore = this.user.hiscore + this.currentQuestion().difficulty
         let user = {user: {hiscore}}
         let options = {
