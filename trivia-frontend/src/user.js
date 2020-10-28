@@ -4,6 +4,13 @@ class User {
         this.score = 0
     }
 
+    static listenForUserSubmit() {
+        userForm.addEventListener('submit', function(e) {
+        e.preventDefault()
+        User.addUser.call(this)
+        })
+    }
+
     static addUser() {
         const name = this.querySelector('input').value
         let user = {user: {name}}

@@ -5,7 +5,5 @@ const welcome = document.getElementById('welcome')
 const scoreCardDiv = document.querySelector("#score_card")
 const endGameDiv = document.querySelector('#end_of_game_message')
 
-userForm.addEventListener('submit', function(e) {
-    e.preventDefault()
-    User.addUser.call(this)
-})
+User.listenForUserSubmit()
+
