@@ -34,7 +34,7 @@ class User {
     }
 
     showScoreCard() {
-        scoreCardDiv.innerHTML = `<p>${this.name}'s Score: <span>0</span></p>`
+        scoreCardDiv.innerHTML = `<p><str>${this.name}'s Score: <span>0</span></str></p>`
         scoreCardDiv.setAttribute('class', 'show')
     }
 

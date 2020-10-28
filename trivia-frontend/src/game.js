@@ -94,6 +94,7 @@ class Game {
     }
 
     currentQuestionDiv() {
+        debugger
         return questionContainer.querySelector('.show')
     }
 
