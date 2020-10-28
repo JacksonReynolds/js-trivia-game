@@ -62,7 +62,6 @@ class Game {
             },
             body: JSON.stringify(user)
         }
-        debugger
         fetch(`http://localhost:3000/users/${this.user.id}`, options)
             .then(resp => resp.json())
             .then(user => {

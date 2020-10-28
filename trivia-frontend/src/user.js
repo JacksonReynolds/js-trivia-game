@@ -61,10 +61,12 @@ class User {
         const table = document.createElement('table')
 
         table.innerHTML += "<tr> <th>user</th> <th>score</th> </tr>"
-
+        debugger
         for (const user of top_users) {
-            table.innerHTML += `<tr> <td>${user.attributes.name}</td> </tr>`
+            table.innerHTML += `<tr> <td>${user.name}</td> <td>${user.score}</td> </tr>`
         }
+
+        hiscoresDiv.appendChild(table)
     }
 
     static toggleHiscores() {
@@ -79,8 +81,7 @@ class User {
                 for (let user of hiscores.data) {
                     top_users.push(new User(user))
                 }
-                console.log(top_users)
-                // this.displayHiscores(top_users)
+                this.displayHiscores(top_users)
             })
     }
 
