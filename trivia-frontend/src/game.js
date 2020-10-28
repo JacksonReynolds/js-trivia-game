@@ -39,9 +39,7 @@ class Game {
             if (!!radio.checked) {
                 let answer = Answer.all.find(a => a.id === radio.value)
                 if (answer.correct) {
-                    console.log("woot")
-                    this.switchQuestionDivs(form)
-                    // this.updateUserPoints()
+                    this.updateUserPoints()
                 } else {
                     alert("YOU FUCKED UP")
                     // end game
@@ -50,34 +48,54 @@ class Game {
         }
     }
 
-    switchQuestionDivs(form) {
-        this.hideCurrentQuestionDiv(form)
-        this.showNextQuestionDiv(form)
+    updateUserPoints() {
+        let points = this.user.points + this.currentQuestion().difficulty
+        let user = {user: {points}}
+        let options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            },
+            body: JSON.stringify(user)
+        }
+        fetch(`http://localhost:3000/users/${this.user.id}`, options)
+            .then(resp => resp.json())
+            .then(user => {
+                this.user.point = user.data.attributes.points
+                this.switchQuestionDivs()
+            })
+    }
+        
+
+    switchQuestionDivs() {
+        this.hideCurrentQuestionDiv()
+        this.showNextQuestionDiv()
     }
 
-    hideCurrentQuestionDiv(form) {
-        const currentQuestionDiv = form.parentElement
-
-        currentQuestionDiv.setAttribute('class', 'hide')
+    hideCurrentQuestionDiv() {
+        this.currentQuestionDiv().setAttribute('class', 'hide')
     }
 
-    showNextQuestionDiv(form) {
-        const nextQuestionDiv = questionContainer.querySelector(`#question-${Question.all[this.indexOfCurrentQuestion(form)+1].id}-div`)
+    showNextQuestionDiv() {
+        const nextQuestionDiv = questionContainer.querySelector(`#question-${Question.all[this.indexOfCurrentQuestion()+1].id}-div`)
 
         nextQuestionDiv.setAttribute('class', 'show')
     }
 
-    indexOfCurrentQuestion(form) {
-        return Question.all.indexOf(this.currentQuestion(form))
+    indexOfCurrentQuestion() {
+        return Question.all.indexOf(this.currentQuestion())
     }
 
-    currentQuestion(form) {
-        return Question.all.find(q => form.parentElement.getAttribute('id') === `question-${q.id}-div`)
+    currentQuestion() {
+        return Question.all.find(q => this.currentQuestionDiv().getAttribute('id') === `question-${q.id}-div`)
+    }
+
+    currentQuestionDiv() {
+        return questionContainer.querySelector('.show')
     }
 
     displayHighScores() {}
-
-    updateScore() {}
 
     toggleUserForm() {
         userFormContainer.getAttribute('class') === 'show' ? userFormContainer.setAttribute("class", 'hide') : userFormContainer.setAttribute("class", 'show')
