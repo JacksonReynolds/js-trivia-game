@@ -47,7 +47,7 @@ questions = [
     },
     {
         difficulty: 2,
-        question: "Madonna's song &quot;Hung Up&quot; includes a piece from which popular 70s song?",
+        question: "Madonna's song \"Hung Up\" includes a piece from which popular 70s song?",
         correct_answer: "Gimmie! Gimmie! Gimme! (A Man After Midnight)",
         incorrect_answers: [
             "Staying Alive",

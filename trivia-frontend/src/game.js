@@ -39,17 +39,40 @@ class Game {
             if (!!radio.checked) {
                 let answer = Answer.all.find(a => a.id === radio.value)
                 if (answer.correct) {
-                    debugger
                     console.log("woot")
-                    // hide this question
-                    // show next
-                    // add point to user score
+                    this.switchQuestionDivs(form)
+                    // this.updateUserPoints()
                 } else {
-                    console.log("pooop")
+                    alert("YOU FUCKED UP")
                     // end game
                 }
             }
         }
+    }
+
+    switchQuestionDivs(form) {
+        this.hideCurrentQuestionDiv(form)
+        this.showNextQuestionDiv(form)
+    }
+
+    hideCurrentQuestionDiv(form) {
+        const currentQuestionDiv = form.parentElement
+
+        currentQuestionDiv.setAttribute('class', 'hide')
+    }
+
+    showNextQuestionDiv(form) {
+        const nextQuestionDiv = questionContainer.querySelector(`#question-${Question.all[this.indexOfCurrentQuestion(form)+1].id}-div`)
+
+        nextQuestionDiv.setAttribute('class', 'show')
+    }
+
+    indexOfCurrentQuestion(form) {
+        return Question.all.indexOf(this.currentQuestion(form))
+    }
+
+    currentQuestion(form) {
+        return Question.all.find(q => form.parentElement.getAttribute('id') === `question-${q.id}-div`)
     }
 
     displayHighScores() {}
