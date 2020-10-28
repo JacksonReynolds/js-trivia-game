@@ -30,9 +30,8 @@ class User {
                 const newGame = new Game(newUser)
 
                 this.reset()
-                if (Question.all.length === 0) {
-                    Question.loadQuestions()
-                }
+                Question.all = []
+                Question.loadQuestions()
                 User.toggleUserForm()
                 newUser.toggleScoreCard()
                 newGame.renderWelcome()
