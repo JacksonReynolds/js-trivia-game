@@ -41,10 +41,11 @@ class Game {
                 if (answer.correct) {
                     this.user.score += this.currentQuestion().difficulty
                     this.user.updateScoreCard()
-                    this.switchQuestionDivs()
+                    if (this.indexOfCurrentQuestion() === Question.all.length-1) {
+                        this.endGame()
+                    } else {this.switchQuestionDivs()}
                 } else {
-                    alert("YOU FUCKED UP")
-                    // end game
+                    this.endGame()
                 }
             }
         }
@@ -97,6 +98,17 @@ class Game {
 
     currentQuestionDiv() {
         return questionContainer.querySelector('.show')
+    }
+
+    endGame() {
+        this.hideCurrentQuestionDiv()
+        this.toggleEndOfGameMessage()
+        // this.patchUserHiscore()
+            // showHiscores (after successful request)
+    }
+
+    toggleEndOfGameMessage() {
+        endGameDiv.getAttribute('class') === 'hide' ? endGameDiv.setAttribute('class', 'show') : endGameDiv.setAttribute('class', 'hide')
     }
 
     displayHighScores() {}
