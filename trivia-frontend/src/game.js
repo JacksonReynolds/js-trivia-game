@@ -53,7 +53,7 @@ class Game {
 
     updateUserHiscore() {
         let score = this.user.score
-        let user = {user: {hiscore}}
+        let user = {user: {score}}
         let options = {
             method: "PATCH",
             headers: {
@@ -62,6 +62,7 @@ class Game {
             },
             body: JSON.stringify(user)
         }
+        debugger
         fetch(`http://localhost:3000/users/${this.user.id}`, options)
             .then(resp => resp.json())
             .then(user => {

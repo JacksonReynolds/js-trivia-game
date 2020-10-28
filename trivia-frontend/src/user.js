@@ -1,7 +1,8 @@
 class User {
     constructor(user) {
+        this.id = user.id
         this.name = user.attributes.name
-        this.score = 0
+        this.score = user.attributes.score
     }
 
     static listenForUserSubmit() {
@@ -29,7 +30,7 @@ class User {
                 const newGame = new Game(newUser)
 
                 this.reset()
-                if (Question.length === 0) {
+                if (Question.all.length === 0) {
                     Question.loadQuestions()
                 }
                 User.toggleUserForm()
@@ -42,8 +43,10 @@ class User {
         userFormContainer.getAttribute('class') === 'show' ? userFormContainer.setAttribute("class", 'hide') : userFormContainer.setAttribute("class", 'show')
     }
 
-    static displayHiscores(hiscores) {
+    static displayHiscores(top_users) {
         const restartBtn = hiscoresDiv.querySelector('#start_over')
+
+        this.renderHiscoresTable(top_users)
 
         this.toggleHiscores()
         restartBtn.addEventListener('click', (e) => {
@@ -54,6 +57,16 @@ class User {
         })
     }
 
+    static renderHiscoresTable(top_users) {
+        const table = document.createElement('table')
+
+        table.innerHTML += "<tr> <th>user</th> <th>score</th> </tr>"
+
+        for (const user of top_users) {
+            table.innerHTML += `<tr> <td>${user.attributes.name}</td> </tr>`
+        }
+    }
+
     static toggleHiscores() {
         hiscoresDiv.getAttribute('class') === 'hide' ? hiscoresDiv.setAttribute('class', 'show') : hiscoresDiv.setAttribute('class', 'hide')
     }
@@ -61,7 +74,14 @@ class User {
     static getHiscores() {
         fetch("http://localhost:3000/hiscores")
             .then(resp => resp.json())
-            .then(hiscores => this.displayHiscores(hiscores))
+            .then(hiscores => {
+                let top_users = []
+                for (let user of hiscores.data) {
+                    top_users.push(new User(user))
+                }
+                console.log(top_users)
+                // this.displayHiscores(top_users)
+            })
     }
 
     toggleScoreCard() {
