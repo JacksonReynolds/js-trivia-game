@@ -100,17 +100,34 @@ class Game {
     }
 
     endGame() {
-        const hiscoresBtn = endGameDiv.querySelector('#to_hiscores')
-
         this.updateUserHiscore()
-
         this.hideCurrentQuestionDiv()
         this.toggleEndOfGameMessage()
+        this.listenForHiscores()
+    }
+
+    listenForHiscores() {
+        const hiscoresBtn = endGameDiv.querySelector('#to_hiscores')
+
         hiscoresBtn.addEventListener('click', (e) => {
             e.preventDefault()
             this.user.toggleScoreCard()
             this.toggleEndOfGameMessage()
             User.getHiscores()
+            this.listenForRestart()
+        })
+    }
+
+    listenForRestart() {
+        const restartBtn = hiscoresDiv.querySelector('#start_over')
+
+        restartBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            User.toggleHiscores()
+            User.clearHiscores()
+            User.toggleUserForm()
+
+            User.listenForUserSubmit()
         })
     }
 

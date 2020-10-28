@@ -44,17 +44,13 @@ class User {
     }
 
     static displayHiscores(top_users) {
-        const restartBtn = hiscoresDiv.querySelector('#start_over')
-
         this.renderHiscoresTable(top_users)
 
         this.toggleHiscores()
-        restartBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            this.toggleHiscores()
-            this.toggleUserForm()
-            this.listenForUserSubmit()
-        })
+    }
+
+    clearHiscores() {
+        hiscoresDiv.querySelector('table').remove()
     }
 
     static renderHiscoresTable(top_users) {
