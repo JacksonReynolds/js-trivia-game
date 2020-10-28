@@ -49,8 +49,8 @@ class Game {
     }
 
     updateUserPoints() {
-        let points = this.user.points + this.currentQuestion().difficulty
-        let user = {user: {points}}
+        let hiscore = this.user.hiscore + this.currentQuestion().difficulty
+        let user = {user: {hiscore}}
         let options = {
             method: "PATCH",
             headers: {
@@ -62,11 +62,11 @@ class Game {
         fetch(`http://localhost:3000/users/${this.user.id}`, options)
             .then(resp => resp.json())
             .then(user => {
-                this.user.point = user.data.attributes.points
+                this.user.hiscore = user.data.attributes.hiscore
                 this.switchQuestionDivs()
             })
     }
-        
+    
 
     switchQuestionDivs() {
         this.hideCurrentQuestionDiv()

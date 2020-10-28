@@ -1,7 +1,6 @@
 class User {
     constructor(user) {
         this.name = user.attributes.name
-        this.points = user.attributes.points
     }
 
     static addUser() {
