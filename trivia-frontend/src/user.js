@@ -22,8 +22,18 @@ class User {
 
                 this.reset()
                 Question.loadQuestions()
-                newGame.toggleUserForm()
+                User.toggleUserForm()
+                newUser.showScoreCard()
                 newGame.renderWelcome()
             })
+    }
+
+    static toggleUserForm() {
+        userFormContainer.getAttribute('class') === 'show' ? userFormContainer.setAttribute("class", 'hide') : userFormContainer.setAttribute("class", 'show')
+    }
+
+    showScoreCard() {
+        scoreCardDiv.innerHTML = `<p>${this.name}'s Score: <span>0</span></p>`
+        scoreCardDiv.setAttribute('class', 'show')
     }
 } 

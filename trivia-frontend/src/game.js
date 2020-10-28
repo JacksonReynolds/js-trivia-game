@@ -97,9 +97,5 @@ class Game {
 
     displayHighScores() {}
 
-    toggleUserForm() {
-        userFormContainer.getAttribute('class') === 'show' ? userFormContainer.setAttribute("class", 'hide') : userFormContainer.setAttribute("class", 'show')
-    }
-
 
 }
