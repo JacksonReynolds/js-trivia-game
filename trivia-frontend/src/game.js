@@ -52,9 +52,7 @@ class Game {
         for (let div of qDivs) {
             if (div.getAttribute('id') === `question-${firstQuestion.id}-div`) {
                 div.setAttribute('class', 'show')
-            } // else {
-            //     div.setAttribute('class', 'hide')
-            // }
+            }
         }
     }
 

@@ -21,6 +21,6 @@ let newGame = new Game
 // listen for button clicks and form submissions
 User.listenForUserSubmit(newGame)
 newGame.listenForStart()
-// newGame.listenForSubmits()
+// listeners for answer forms are built after questions are rendered
 newGame.listenForHiscores()
 newGame.listenForRestart()
