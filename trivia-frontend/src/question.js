@@ -25,6 +25,8 @@ class Question {
             .then(resp => resp.json())
             .then(questions => {
                 Question.createQuestions(questions.data)
+                Question.renderQuestions()
+                this.listenForSubmits()
             })
     }
 
@@ -57,7 +59,7 @@ class Question {
 
     static renderQuestions() {
         for (const question of Question.all) {
-            question.createQuestionDiv(Question.all.indexOf(question))
+            question.createQuestionDiv()
             question.renderAnswers()
         }
     }
@@ -66,16 +68,12 @@ class Question {
         questionContainer.getAttribute('class') === 'show' ? questionContainer.setAttribute('class', 'hide') : questionContainer.setAttribute('class', 'show')
     }
 
-    createQuestionDiv(i) {
+    createQuestionDiv() {
         const questionDiv = questionContainer.appendChild(document.createElement('div'))
         const questionContentP = questionDiv.appendChild(document.createElement('p'))
 
-        if (i === 0) {
-            questionDiv.setAttribute('class', 'show')
-        } else {
-            questionDiv.setAttribute('class', 'hide')
-        }
         questionDiv.setAttribute('id', `question-${this.id}-div`)
+        questionDiv.setAttribute('class', 'hide')
         questionContentP.innerText += this.content
     }
 

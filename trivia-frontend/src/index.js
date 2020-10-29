@@ -1,5 +1,4 @@
 // divs
-
 const userFormContainer = document.getElementById("user_form_container")
 const userForm = userFormContainer.querySelector('#user_form')
 const questionContainer = document.getElementById('question_container')
@@ -22,7 +21,6 @@ let newGame = new Game
 // listen for button clicks and form submissions
 User.listenForUserSubmit(newGame)
 newGame.listenForStart()
-// listeners for answer forms are rendered with forms, then removed once 
-// player loses or reaches end of questions
+// newGame.listenForSubmits()
 newGame.listenForHiscores()
 newGame.listenForRestart()

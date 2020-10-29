@@ -30,9 +30,6 @@ class User {
                 game.user = newUser
 
                 userForm.reset()
-                Question.all = []
-                Question.clearQuestionContainer()
-                Question.loadQuestions()
                 User.toggleUserForm()
                 newUser.toggleScoreCard()
                 game.toggleWelcome()

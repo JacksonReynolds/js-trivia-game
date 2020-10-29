@@ -1,4 +1,8 @@
 class Game {
+    constructor() {
+        Question.loadQuestions.call(this)
+        // Question.renderQuestions()
+    }
     
     set user(user) {
         this._user = user
@@ -32,16 +36,30 @@ class Game {
 
     startGame(e) {
         e.preventDefault()
-        this.hideWelcome()
-        Question.toggleQuestionContainer()
+        this.toggleWelcome()
         Question.shuffleQuestions()
-        Question.renderQuestions()
-        this.listenForSubmits()
+        for (const question of Question.all) {
+            question.shuffleAnswers()
+        }
+        this.showFirstQuestion()
+        Question.toggleQuestionContainer()
+    }
+
+    showFirstQuestion() {
+        const firstQuestion = Question.all[0]
+        const qDivs = questionContainer.querySelectorAll('div')
+
+        for (let div of qDivs) {
+            if (div.getAttribute('id') === `question-${firstQuestion.id}-div`) {
+                div.setAttribute('class', 'show')
+            } // else {
+            //     div.setAttribute('class', 'hide')
+            // }
+        }
     }
 
     listenForSubmits() {
         const answerForms = document.querySelectorAll('#answer-form')
-
         for (const form of answerForms) {
             form.addEventListener('submit', this.evaluateAnswer.bind(this))
         }
@@ -55,6 +73,7 @@ class Game {
         for (let radio of formRadios) {
             if (!!radio.checked) {
                 let answer = Answer.all.find(a => a.id === radio.value)
+                form.reset()
                 if (answer.correct) {
                     this.user.score += this.currentQuestion().difficulty
                     this.user.updateScoreCard()
@@ -118,7 +137,7 @@ class Game {
 
     endGame() {
         this.updateUserHiscore()
-        // this.hideCurrentQuestionDiv()
+        this.hideCurrentQuestionDiv()
         this.toggleGameWindow()
         Question.toggleQuestionContainer()
         this.toggleEndOfGameMessage()
