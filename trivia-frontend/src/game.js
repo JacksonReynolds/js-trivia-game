@@ -23,6 +23,7 @@ class Game {
     startGame(e) {
         e.preventDefault()
         this.hideWelcome()
+        Question.toggleQuestionContainer()
         Question.shuffleQuestions()
         Question.renderQuestions()
         this.listenForSubmits()
@@ -108,8 +109,15 @@ class Game {
     endGame() {
         this.updateUserHiscore()
         this.hideCurrentQuestionDiv()
+        Question.toggleQuestionContainer()
         this.toggleEndOfGameMessage()
     }
+
+    toggleEndOfGameMessage() {
+        endGameDiv.getAttribute('class') === 'hide' ? endGameDiv.setAttribute('class', 'show') : endGameDiv.setAttribute('class', 'hide')
+    }
+
+    // event listeners
 
     listenForHiscores() {
         hiscoresBtn.addEventListener('click', (e) => {
@@ -127,9 +135,5 @@ class Game {
             User.clearHiscores()
             User.toggleUserForm()
         })
-    }
-
-    toggleEndOfGameMessage() {
-        endGameDiv.getAttribute('class') === 'hide' ? endGameDiv.setAttribute('class', 'show') : endGameDiv.setAttribute('class', 'hide')
     }
 }

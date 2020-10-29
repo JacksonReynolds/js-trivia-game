@@ -62,6 +62,10 @@ class Question {
         }
     }
 
+    static toggleQuestionContainer() {
+        questionContainer.getAttribute('class') === 'show' ? questionContainer.setAttribute('class', 'hide') : questionContainer.setAttribute('class', 'show')
+    }
+
     createQuestionDiv(i) {
         const questionDiv = questionContainer.appendChild(document.createElement('div'))
         const questionContentP = questionDiv.appendChild(document.createElement('p'))
@@ -84,14 +88,5 @@ class Question {
             answersForm.innerHTML += `<br><input type="radio" id="radio" name="answer" value="${answer.id}"><label>${answer.content}</label>`
         }
         answersForm.innerHTML += "<br><input type='submit' id='submit'>"
-    }
-
-    // hideCurrentQuestion() {
-    //     const currentQuestionDiv = document.querySelector(`#question-${this.id}-div`)
-
-    //     currentQuestionDiv.setAttribute('class', 'hide')
-    // }
-
-    showNextQuestion() {
     }
 }

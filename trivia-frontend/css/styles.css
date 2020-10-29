@@ -31,14 +31,20 @@ body {
     height: 100%;
 }
 
-.container div {
+/* .container div {
     padding: 10px;
     margin: auto;
-}
+} */
 
 #score_card {
     height: 100%;
     padding: 10px;
     width: 25%;
     border-right: 3px solid black;
+}
+
+#question_container, #end_of_game_message, #welcome {
+    height: 100%;
+    padding: 10px;
+    width: 75%;
 }
