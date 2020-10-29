@@ -35,7 +35,8 @@ class User {
                 Question.loadQuestions()
                 User.toggleUserForm()
                 newUser.toggleScoreCard()
-                game.renderWelcome()
+                game.toggleWelcome()
+                game.toggleGameWindow()
             })
     }
 

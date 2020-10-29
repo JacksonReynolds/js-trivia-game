@@ -7,6 +7,7 @@ const welcome = document.getElementById('welcome')
 const scoreCardDiv = document.querySelector("#score_card")
 const endGameDiv = document.querySelector('#end_of_game_message')
 const hiscoresDiv = document.querySelector('#hiscores')
+const gameWindow = document.getElementById('game_window')
 
 // buttons/forms
 const startBtn = welcome.querySelector('#go')

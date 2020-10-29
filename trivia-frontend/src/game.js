@@ -8,8 +8,18 @@ class Game {
         return this._user
     }
 
+
+    /////
     renderWelcome() {
         welcome.setAttribute('class', 'show')
+    }
+
+    toggleWelcome() {
+        welcome.getAttribute('class') === 'show' ? welcome.setAttribute('class', 'hide') : welcome.setAttribute('class', 'show')
+    }
+
+    toggleGameWindow() {
+        gameWindow.getAttribute('class') === 'show' ? gameWindow.setAttribute('class', 'hide') : gameWindow.setAttribute('class', 'show')
     }
 
     listenForStart() {
@@ -108,7 +118,8 @@ class Game {
 
     endGame() {
         this.updateUserHiscore()
-        this.hideCurrentQuestionDiv()
+        // this.hideCurrentQuestionDiv()
+        this.toggleGameWindow()
         Question.toggleQuestionContainer()
         this.toggleEndOfGameMessage()
     }

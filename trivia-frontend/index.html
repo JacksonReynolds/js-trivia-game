@@ -18,6 +18,10 @@
     <h1>Trivia Time!</h1>
   </div>
 
+  <div class="readme">
+    <p>Enter your name below and answer the questions as they are provided to you. Good luck!</p>
+  </div>
+
   <div class="container">
 
     <div class="show" id="user_form_container">
@@ -27,17 +31,16 @@
       </form>
     </div>
 
-    <div class="hide" id="score_card"></div>
-
-    <div class='hide' id="welcome">
-      <h2 id='welcome_greeting'></h2>
-      <p id='welcome_instructions'> The game will start once you click Go!
-        You get to keep playing as long as you keep answering correctly. Answer incorrectly, and you lose!
-      </p><br>
-      <button id="go">Go!</button>
-    </div>
-
-    <div class="hide" id="question_container">
+    <div class='hide' id="game_window">
+      <div class="hide" id="score_card"></div>
+      <div class="hide" id="question_container"></div>
+      <div class='hide' id="welcome">
+        <h2 id='welcome_greeting'></h2>
+        <p id='welcome_instructions'> The game will start once you click Go!
+          You get to keep playing as long as you keep answering correctly. Answer incorrectly, and you lose!
+        </p><br>
+        <button id="go">Go!</button>
+      </div>
     </div>
 
     <div class="hide" id="end_of_game_message">
