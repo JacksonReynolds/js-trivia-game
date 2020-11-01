@@ -28,6 +28,11 @@ class Question {
                 Question.renderQuestions()
                 this.listenForSubmits()
             })
+            .catch(error => Question.serverError(error))
+    }
+
+    static serverError(error) {
+        alert(error + "\nPlease try again!")
     }
 
     static shuffleQuestions() {

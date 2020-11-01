@@ -35,6 +35,14 @@ class User {
                 game.toggleWelcome()
                 game.toggleGameWindow()
             })
+            .catch(error => {
+                this.serverError(error)
+            }
+            )
+    }
+
+    static serverError(error) {
+        alert(error + "\nPlease try again!")
     }
 
     static toggleUserForm() {
@@ -75,6 +83,25 @@ class User {
                 }
                 this.displayHiscores(top_users)
             })
+    }
+
+    updateUserHiscore() {
+        let score = this.score
+        let user = {user: {score}}
+        let options = {
+            method: "PATCH",
+            headers: {
+                "Content-Type": 'application/json',
+                "Accept": 'application/json'
+            },
+            body: JSON.stringify(user)
+        }
+        fetch(`http://localhost:3000/users/${this.id}`, options)
+            .then(resp => resp.json())
+            .then(user => {
+                this.score = user.data.attributes.hiscore
+            })
+            .catch(error => User.serverError(error))
     }
 
     toggleScoreCard() {

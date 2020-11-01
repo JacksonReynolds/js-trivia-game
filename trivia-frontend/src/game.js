@@ -85,25 +85,6 @@ class Game {
         }
     }
 
-    updateUserHiscore() {
-        let score = this.user.score
-        let user = {user: {score}}
-        let options = {
-            method: "PATCH",
-            headers: {
-                "Content-Type": 'application/json',
-                "Accept": 'application/json'
-            },
-            body: JSON.stringify(user)
-        }
-        fetch(`http://localhost:3000/users/${this.user.id}`, options)
-            .then(resp => resp.json())
-            .then(user => {
-                this.user.score = user.data.attributes.hiscore
-            })
-    }
-    
-
     switchQuestionDivs() {
         let i = this.indexOfCurrentQuestion() // grab before hiding the current question div
 
@@ -134,7 +115,7 @@ class Game {
     }
 
     endGame() {
-        this.updateUserHiscore()
+        this.user.updateUserHiscore()
         this.hideCurrentQuestionDiv()
         this.toggleGameWindow()
         Question.toggleQuestionContainer()
