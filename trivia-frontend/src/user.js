@@ -83,6 +83,7 @@ class User {
                 }
                 this.displayHiscores(top_users)
             })
+            .catch(error => this.serverError(error))
     }
 
     updateUserHiscore() {
