@@ -1,7 +1,6 @@
 class Game {
     constructor() {
         Question.loadQuestions.call(this)
-        // Question.renderQuestions()
     }
     
     set user(user) {
@@ -13,25 +12,10 @@ class Game {
     }
 
 
-    /////
+    // game control flow minstance methods
+
     renderWelcome() {
         welcome.setAttribute('class', 'show')
-    }
-
-    toggleWelcome() {
-        welcome.getAttribute('class') === 'show' ? welcome.setAttribute('class', 'hide') : welcome.setAttribute('class', 'show')
-    }
-
-    toggleGameWindow() {
-        gameWindow.getAttribute('class') === 'show' ? gameWindow.setAttribute('class', 'hide') : gameWindow.setAttribute('class', 'show')
-    }
-
-    listenForStart() {
-        startBtn.addEventListener('click', this.startGame.bind(this))
-    }
-
-    hideWelcome() {
-        welcome.setAttribute('class', 'hide')
     }
 
     startGame(e) {
@@ -56,13 +40,6 @@ class Game {
         }
     }
 
-    listenForSubmits() {
-        const answerForms = document.querySelectorAll('#answer-form')
-        for (const form of answerForms) {
-            form.addEventListener('submit', this.evaluateAnswer.bind(this))
-        }
-    }
-
     evaluateAnswer(e) {
         const form = e.target
         const formRadios = form.querySelectorAll('#radio')
@@ -84,6 +61,47 @@ class Game {
             }
         }
     }
+
+    endGame() {
+        this.user.updateUserHiscore()
+        this.hideCurrentQuestionDiv()
+        this.toggleGameWindow()
+        Question.toggleQuestionContainer()
+        this.toggleEndOfGameMessage()
+    }
+
+    // listeners
+
+    listenForStart() {
+        startBtn.addEventListener('click', this.startGame.bind(this))
+    }
+
+    listenForSubmits() {
+        const answerForms = document.querySelectorAll('#answer-form')
+        for (const form of answerForms) {
+            form.addEventListener('submit', this.evaluateAnswer.bind(this))
+        }
+    }
+
+    listenForHiscores() {
+        hiscoresBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            this.user.toggleScoreCard()
+            this.toggleEndOfGameMessage()
+            User.getHiscores()
+        })
+    }
+
+    listenForRestart() {
+        restartBtn.addEventListener('click', (e) => {
+            e.preventDefault()
+            User.toggleHiscores()
+            User.clearHiscores()
+            User.toggleUserForm()
+        })
+    }
+
+    // question div switching 
 
     switchQuestionDivs() {
         let i = this.indexOfCurrentQuestion() // grab before hiding the current question div
@@ -114,35 +132,18 @@ class Game {
         return questionContainer.querySelector('.show')
     }
 
-    endGame() {
-        this.user.updateUserHiscore()
-        this.hideCurrentQuestionDiv()
-        this.toggleGameWindow()
-        Question.toggleQuestionContainer()
-        this.toggleEndOfGameMessage()
+    // togglers 
+
+    toggleWelcome() {
+        welcome.getAttribute('class') === 'show' ? welcome.setAttribute('class', 'hide') : welcome.setAttribute('class', 'show')
+    }
+
+    toggleGameWindow() {
+        gameWindow.getAttribute('class') === 'show' ? gameWindow.setAttribute('class', 'hide') : gameWindow.setAttribute('class', 'show')
     }
 
     toggleEndOfGameMessage() {
         endGameDiv.getAttribute('class') === 'hide' ? endGameDiv.setAttribute('class', 'show') : endGameDiv.setAttribute('class', 'hide')
     }
 
-    // event listeners
-
-    listenForHiscores() {
-        hiscoresBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            this.user.toggleScoreCard()
-            this.toggleEndOfGameMessage()
-            User.getHiscores()
-        })
-    }
-
-    listenForRestart() {
-        restartBtn.addEventListener('click', (e) => {
-            e.preventDefault()
-            User.toggleHiscores()
-            User.clearHiscores()
-            User.toggleUserForm()
-        })
-    }
 }
