@@ -594,3 +594,18 @@ questions.each do |question|
         q.answers.create(content: answer, correct: false)
     end
 end
+
+users = [
+    {name: 'jackson', score: 30},
+    {name: 'emma', score: 35},
+    {name: 'ozzy', score: 100},
+    {name: 'GOAT', score: 1},
+    {name: 'Talha', score: 25},
+    {name: 'Zayne', score: 14},
+    {name: 'Aniqa', score: 29},
+    {name: 'Olivia', score: 20},
+    {name: 'Myron', score: 7},
+    {name: 'Shea', score: 12}
+]
+
+User.create(users)
