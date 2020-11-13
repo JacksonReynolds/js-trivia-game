@@ -29,7 +29,7 @@ class Question {
                 Question.createQuestions(questions.data)
                 Question.renderQuestions()
                 this.listenForSubmits()
-                this.listenForHints()
+                // this.listenForHints()
             })
             .catch(error => Question.serverError(error))
     }
@@ -79,12 +79,12 @@ class Question {
     createQuestionDiv() {
         const questionDiv = questionContainer.appendChild(document.createElement('div'))
         const questionContentP = questionDiv.appendChild(document.createElement('p'))
-        const hintBtn = questionDiv.appendChild(document.createElement('button'))
-        const hintDiv = questionDiv.appendChild(document.createElement('Div'))
+        // const hintBtn = questionDiv.appendChild(document.createElement('button'))
+        // const hintDiv = questionDiv.appendChild(document.createElement('Div'))
 
-        hintBtn.setAttribute('id', 'hint')
-        hintDiv.setAttribute('class', 'hide')
-        hintDiv.innerText = 'hint' // this.hintContent
+        // hintBtn.setAttribute('id', 'hint')
+        // hintDiv.setAttribute('class', 'hide')
+        // hintDiv.innerText = 'hint' // this.hintContent
 
         questionDiv.setAttribute('id', `question-${this.id}-div`)
         questionDiv.setAttribute('class', 'hide')
